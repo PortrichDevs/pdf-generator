@@ -16,8 +16,22 @@ def build_print_options(options: dict = None):
     return merged
 
 
+def check_if_tmp_directory_is_exists_and_writable() -> bool:
+    """Check if /tmp directory exists and is writable"""
+    try:
+        with tempfile.NamedTemporaryFile(dir="/tmp") as tmp:
+            tmp.write(b"test")
+            tmp.flush()
+        return True
+    except Exception:
+        return False
+
+
 def generate_pdf(html: str, print_options: dict) -> str:
     """Return base64-encoded pdf"""
+
+    if not check_if_tmp_directory_is_exists_and_writable():
+        raise RuntimeError("/tmp directory does not exist or is not writable")
 
     with tempfile.NamedTemporaryFile(suffix=".html") as tmp:
         tmp.write(html.encode())
