@@ -16,7 +16,7 @@ resource "aws_lambda_function" "this" {
   package_type  = "Image"
   image_uri     = "${var.repository_url}:latest"
 
-  timeout     = 30
+  timeout     = 60
   memory_size = 1024
 }
 
