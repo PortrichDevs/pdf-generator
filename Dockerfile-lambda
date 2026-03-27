@@ -1,8 +1,8 @@
 FROM public.ecr.aws/lambda/python:3.11
 
-RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-  && yum install -y https://rpms.remirepo.net/enterprise/remi-release-7.rpm \
-  && yum install -y chromium chromedriver ipa-gothic-fonts ipa-mincho-fonts ipa-pgothic-fonts ipa-pmincho-fonts \
+RUN amazon-linux-extras install -y epel \
+  && yum install -y chromium chromedriver \
+    ipa-gothic-fonts ipa-mincho-fonts ipa-pgothic-fonts ipa-pmincho-fonts \
   && yum clean all
 
 COPY requirements.txt .
